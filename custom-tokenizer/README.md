@@ -17,3 +17,15 @@ Tokeniser Class Explanation:
 Encoding is done by taking each word and dividing it into chunks, eg: Cat -> 'C' (chunk of size 1) -> 'at'(chunk of size 2) . For a chunk size greater than that of 1, the encoded string will be seperated by a |(pipe).
 
 For better optimization, the encoding is memoized too 🔥🔥
+
+How to get Started?? 🤔🤔
+
+SIMPLE!!
+
+Step 1: npm i tokeniser-package
+
+Step 2: import the Tokenizer Class from tokeniser-package i.e. 
+
+       import { Tokenizer } from "tokeniser-package";
+
+Step 3: use the exposed methods "encode" / "decode" from the class instance

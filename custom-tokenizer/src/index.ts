@@ -1,48 +1,51 @@
 export class Tokenizer {
   private memo: { [key: string]: string } = {};
 
-  encode(text: string): string[] {
-    const tokens: string[] = [];
-    const words = text.split(" ");
+ encode(text: string): string[] {
+  const tokens: string[] = [];
+  const words = text.split(" ");
 
-    words.forEach((word, wordIndex) => {
-      if (word.length === 1) {
-        const char = word;
-        if (!(char in this.memo)) {
-          this.memo[char] = char.charCodeAt(0).toString();
-        }
-        tokens.push(this.memo[char]);
-      } else {
-        const firstChar = word[0];
-        if (!(firstChar in this.memo)) {
-          this.memo[firstChar] = firstChar.charCodeAt(0).toString();
-        }
-        tokens.push(this.memo[firstChar]);
-
-        let remaining = word.slice(1);
-        let i = 0;
-        let window = 2;
-
-        while (i < remaining.length) {
-          const chunk = remaining.slice(i, i + window);
-          if (!(chunk in this.memo)) {
-            this.memo[chunk] = chunk
-              .split("")
-              .map((c) => c.charCodeAt(0))
-              .join("|");
-          }
-          tokens.push(this.memo[chunk]);
-          i += window;
-          window++;
-        }
+  words.forEach((word, wordIndex) => {
+    if (word.length === 0) {
+      tokens.push("32"); 
+    } else if (word.length === 1) {
+      const char = word;
+      if (!(char in this.memo)) {
+        this.memo[char] = char.charCodeAt(0).toString();
       }
-      if (wordIndex < words.length - 1) {
-        tokens.push("32");
+      tokens.push(this.memo[char]);
+    } else {
+      const firstChar = word[0];
+      if (!(firstChar in this.memo)) {
+        this.memo[firstChar] = firstChar.charCodeAt(0).toString();
       }
-    });
+      tokens.push(this.memo[firstChar]);
 
-    return tokens;
-  }
+      let remaining = word.slice(1);
+      let i = 0;
+      let window = 2;
+
+      while (i < remaining.length) {
+        const chunk = remaining.slice(i, i + window);
+        if (!(chunk in this.memo)) {
+          this.memo[chunk] = chunk
+            .split("")
+            .map((c) => c.charCodeAt(0))
+            .join("|");
+        }
+        tokens.push(this.memo[chunk]);
+        i += window;
+        window++;
+      }
+    }
+
+    if (wordIndex < words.length - 1) {
+      tokens.push("32");
+    }
+  });
+
+  return tokens;
+}
 
   decode(tokens: string[]): string {
     let output = "";

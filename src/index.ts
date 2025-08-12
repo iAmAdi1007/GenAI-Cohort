@@ -1,4 +1,4 @@
-class Tokenizer {
+export class Tokenizer {
   private memo: { [key: string]: string } = {};
 
   encode(text: string): string[] {

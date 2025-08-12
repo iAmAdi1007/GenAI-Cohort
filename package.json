@@ -1,0 +1,21 @@
+{
+  "name": "tokeniser-package",
+  "version": "1.0.0",
+  "description": "A simple tokenizer for encoding/decoding text into numeric tokens.",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc"
+  },
+  "keywords": [
+    "tokenizer",
+    "encode",
+    "decode",
+    "text"
+  ],
+  "author": "Aditya Pratap",
+  "license": "MIT",
+  "dependencies": {
+    "typescript": "^5.9.2"
+  }
+}
